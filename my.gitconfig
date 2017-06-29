@@ -1,0 +1,25 @@
+[user]
+    name = Sandor Dargo
+    email = sandordargo@github.com
+
+[alias]
+    lg = log -11 --graph --abbrev-commit --decorate=short --format=format:'%C(blue)%h%C(reset) - %C(cyan)%ai%C(reset) %C(yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(bold yellow)- %an%C(reset)'
+    lgt = log --graph --topo-order --abbrev-commit --decorate=short --format=format:'%C(blue)%h%C(reset) - %C(cyan)%ai%C(reset) %C(yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(bold yellow)- %an%C(reset)'
+    st = status
+    ci = commit
+	last = log -1 HEAD
+
+[pager]
+   # log = /remote/users/jmazeries/bin/git/contrib/diff-highlight/diff-highlight | less
+   # show = /remote/users/jmazeries/bin/git/contrib/diff-highlight/diff-highlight | less
+   # diff = /remote/users/jmazeries/bin/git/contrib/diff-highlight/diff-highlight | less
+[color]
+    ui = auto
+[merge]
+    conflictstyle = diff3
+[core]
+	editor = subl -w
+[credential]
+	helper = cache
+[credentials "https://github"]
+	com = sandordargo

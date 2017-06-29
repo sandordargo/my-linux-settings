@@ -1,0 +1,42 @@
+# Enable tab completion
+source ~/.git-completion.bash
+
+# colors!
+green="\[\033[0;32m\]"
+ocher="\[\033[0;33m\]"
+yellow="\[\033[0;93m\]"
+white="\[\033[0;97m\]"
+red="\[\033[0;31m\]"
+blue="\[\033[0;34m\]"
+purple="\[\033[0;35m\]"
+reset="\[\033[0m\]"
+
+# Change command prompt
+source ~/.git-prompt.sh
+export GIT_PS1_SHOWDIRTYSTATE=1
+# '\u' adds the name of the current user to the prompt
+# '\$(__git_ps1)' adds git-related stuff
+# '\W' adds the name of the current directory
+export PS1="$red\u$white@$green\h$ocher\$(__git_ps1)$yellow \w $ $reset"
+
+export PATH=$PATH:/home/sdargo/devtools/apache-maven-3.3.9/bin:/home/sdargo/devtools/jdk1.8.0_102/bin/:/home/sdargo/devtools/android-studio/bin/:/home/sdargo/devtools:/home/sdargo/devtools/openshift-origin-client-tools-v1.5.1-7b451fc-linux-64bit:/home/sdargo/devtools/neo4j-community-3.2.1/bin/:/home/sdargo/devtools/
+
+
+alias python=python3
+alias pydisc='python2.7 -m unittest discover tests'
+
+
+dumpneo() {
+  neo4j stop
+  local DATE=`date +"%Y-%m-%d-%H-%M-%S"`
+  /home/sdargo/devtools/neo4j-community-3.2.1/bin/neo4j-admin dump --database=$1.db --to=/home/sdargo/devtools/neo4j-community-3.2.1/data/databases/$1.${DATE}.db
+  neo4j start
+  mkdir -p /home/sdargo/Dropbox/neodumps/
+  mv /home/sdargo/devtools/neo4j-community-3.2.1/data/databases/$1.${DATE}.db /home/sdargo/Dropbox/neodumps/
+}
+
+loadneo() {
+  neo4j stop
+  /home/sdargo/devtools/neo4j-community-3.2.1/bin/neo4j-admin load --from=/home/sdargo/Dropbox/neodumps/$2 --database=$1.db --force
+  neo4j start
+}
